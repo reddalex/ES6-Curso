@@ -1,4 +1,6 @@
-/*Seccion 2 Nuevos Métodos con cadenas de caracteres - string*/
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+SECCION 2 Nuevos métodos con cadenas de caracteres - String
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 function startEndInclude(){
   /*En ES6 se han incluido 3 funciones básicas que permiten trabajar con Strings*/
@@ -129,7 +131,7 @@ function plantillasLiterales(){
   /*También se pueden reemplazar por resultados de funciones como en el siguiente
     ejemplo*/
 
-  let saludoCompletoTemplate2 = `El nombre completo es ${_sreturnNombreCompleto()}`;
+  let saludoCompletoTemplate2 = `El nombre completo es ${_returnNombreCompleto()}`;
   console.log(saludoCompletoTemplate2);
 
   /*Lo que está dentro de ${} en un template literal, es codigo JavaScript Puro*/
@@ -146,7 +148,70 @@ function plantillasLiterales(){
 function templateLiteralTag(){
   /*Literal Templates con Tags*/
 
-  
+  /*Los templates literales, tienen una función bastante util, que sirve para
+    cuando se  quieren validar los datos o darles algn formato antes de la
+    asignación de la variable*/
+
+  /*Ejemplo*/
+
+  let unidades = 5,
+      costo_unitario = 10;
+
+  /*Que son los tags?, son funciones que se van a ejecutar justo cuando se esté
+    construyendo el template literal, en este caso, "etiqueta" es el tag que se
+    disparará cuado se esté construyendo, la función debe estar definida, para
+    que no de error en tiempo de ejecución*/
+
+  let mensaje = _etiqueta`${unidades} lapices cuestan ${costo_unitario * unidades} pesos`
+
+  console.log(mensaje);
+
+}
+
+function valoresRaw(){
+  /*Usando valores Raw(crudos) en los templates literals*/
+
+  /*Cuando tenemos un String, a veces se tienen caracteres especiales que hacen
+    un cambio en el String antes de ser impresos, pero cuando se necesita evaluar
+    todo el string tomando en cuenta también los caracteres que especiales
+    es cuando se usan los valores crudos o raw, existe un tag predeterminado para
+    hacer eso
+  */
+
+  let mensaje = `Hola \n Mundo \\`,
+      mensaje2 = String.raw`Hola \n Mundo \\`;
+
+  //var mensaje3 = String.raw"Hola \n Mundo \\";
+
+  console.log(mensaje);
+  console.log(mensaje2);
+
+  /*No funciona con Strings normales, solo es caracteristico de los Template Literales*/
+  //console.log(mensaje3);
+}
+
+function _etiqueta(literales, ...sustituciones){
+  /*Funcion tag para el ejemplo de templates literals con tags*/
+
+  /*Esta función tag, va a evaluar el template literal y cambiarlo completamente
+    antes de su asignación a la variable*/
+
+  /*Nota:Toda función en JAVASCRIPT, regresa un undefined si no se especifica
+    que valor retornara, y así mismo, siempre recibe argumentos aunque no se
+    especifiquen. Siempre reciben un objeto llamada arguments*/
+
+    console.log(literales);
+    console.log(sustituciones);
+
+    let resultado = "";
+
+    for (let i =0 ; i < sustituciones.length; i++){
+      resultado += literales[i];
+      resultado += sustituciones[i];
+    }
+
+    /*  Esto permite un gran control en los templates literales */
+  return resultado
 }
 
 function _returnNombreCompleto(){
